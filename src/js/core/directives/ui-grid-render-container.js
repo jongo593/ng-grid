@@ -78,6 +78,8 @@
                 scrollEvent.verticalScrollLength = rowContainer.getVerticalScrollLength();
                 var scrollYPercentage = (scrollTop + scrollYAmount) / scrollEvent.verticalScrollLength;
 
+                console.log(scrollTop, scrollYAmount, scrollEvent.verticalScrollLength);
+
                 // Keep scrollPercentage within the range 0-1.
                 if (scrollYPercentage < 0) { scrollYPercentage = 0; }
                 else if (scrollYPercentage > 1) { scrollYPercentage = 1; }
@@ -98,6 +100,8 @@
 
                 scrollEvent.x = { percentage: scrollXPercentage, pixels: scrollXAmount };
               }
+
+              // console.log('atBottom', scrollEvent.atBottom(scrollTop), scrollTop);
 
               // Let the parent container scroll if the grid is already at the top/bottom
               if ((event.deltaY !== 0 && (scrollEvent.atTop(scrollTop) || scrollEvent.atBottom(scrollTop))) ||
