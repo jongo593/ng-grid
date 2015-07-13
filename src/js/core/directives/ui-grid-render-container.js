@@ -74,15 +74,27 @@
                 var scrollYAmount = event.deltaY * -1 * event.deltaFactor;
 
                 scrollTop = containerCtrl.viewport[0].scrollTop;
+
                 // Get the scroll percentage
                 scrollEvent.verticalScrollLength = rowContainer.getVerticalScrollLength();
+
+                // If the previous scrollTop plus the previous scrollAmount is less than or equal to the current scroll Top, add the scroll amount on to the scrollTop manually.
+                console.log('Scroll top check', scrollYAmount, rowContainer.prevScrollTop, scrollTop, scrollEvent.verticalScrollLength);
+                if (scrollYAmount > 0 && (scrollYAmount + rowContainer.prevScrollTop) > (scrollTop - scrollYAmount) && scrollTop < scrollEvent.verticalScrollLength) {
+                  console.log('Manually adding scroll top!', scrollYAmount, rowContainer.prevScrollTop, scrollTop);
+                  containerCtrl.viewport[0].scrollTop += scrollYAmount;
+                  return;
+                }
+
                 var scrollYPercentage = (scrollTop + scrollYAmount) / scrollEvent.verticalScrollLength;
 
-                console.log(scrollTop, scrollYAmount, scrollEvent.verticalScrollLength);
+                // console.log(scrollTop, scrollYAmount, scrollEvent.verticalScrollLength);
 
                 // Keep scrollPercentage within the range 0-1.
                 if (scrollYPercentage < 0) { scrollYPercentage = 0; }
                 else if (scrollYPercentage > 1) { scrollYPercentage = 1; }
+
+                // renderContainer.prevScrollAmount = scrollYAmount;
 
                 scrollEvent.y = { percentage: scrollYPercentage, pixels: scrollYAmount };
               }
