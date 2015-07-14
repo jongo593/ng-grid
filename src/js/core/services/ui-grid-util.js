@@ -1133,7 +1133,7 @@ module.service('gridUtil', ['$log', '$window', '$document', '$http', '$templateC
   };
 
   var mouseWheeltoBind = ( 'onwheel' in document || document.documentMode >= 9 ) ? ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
-      nullLowestDeltaTimeout,
+      //nullLowestDeltaTimeout,
       lowestDelta;
 
   s.on.mousewheel = function (elm, fn) {
